@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": false,
+    "declaration": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "skipLibCheck": true,
+  },
+  "include": ["src"]
+}
