@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-console-events",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Babel plugin that allows to subscribe to console events",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
