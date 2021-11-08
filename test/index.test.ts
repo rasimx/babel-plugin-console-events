@@ -1,6 +1,7 @@
 import pluginTester from 'babel-plugin-tester'
-import plugin, { ConsoleEvent, subscribe } from '../src'
+import plugin, { subscribe } from '../src'
 import * as path from "path";
+import { ConsoleEvent } from "../src/subscribe";
 
 pluginTester({
     plugin: plugin,
