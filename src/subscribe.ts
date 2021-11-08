@@ -4,7 +4,6 @@ export type ConsoleEvent = {
   loc: [string, string]
 }
 
-
 export type Listener = (event: ConsoleEvent) => void
 
 class EventEmitter {
