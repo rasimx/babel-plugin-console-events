@@ -1,6 +1,5 @@
 import type babelCore from '@babel/core'
-import { Expression, SpreadElement } from "@babel/types";
-
+import { types } from "@babel/core";
 
 type VisitorState = {
   file: {
@@ -23,8 +22,8 @@ function consoleEventsPlugin(babel: typeof babelCore): babelCore.PluginObj<Visit
           t.isExpressionStatement(path.parentPath)
         ) {
 
-          const fileName = state.file.opts.filename.split('/').splice(-1)[0];
-          const lineNumber = path.node.loc.start.line
+          const fileName = state.file.opts.filename?.split('/').splice(-1)[0];
+          const lineNumber = path.node.loc?.start.line
 
           const newNode = template(`
                               if (console.events) {
@@ -37,8 +36,10 @@ function consoleEventsPlugin(babel: typeof babelCore): babelCore.PluginObj<Visit
                             `);
           path.insertAfter(newNode({
             TYPE: t.stringLiteral(path.node.callee.property.name),
-            ARGS: t.arrayExpression(path.node.arguments as Array<null | Expression | SpreadElement>),
-            LOC: t.arrayExpression([t.stringLiteral(fileName), t.stringLiteral(lineNumber.toString())]),
+            ARGS: t.arrayExpression(path.node.arguments as Array<types.Expression>),
+            LOC: fileName && lineNumber
+              ? t.arrayExpression([t.stringLiteral(fileName), t.stringLiteral(lineNumber.toString())])
+              : types.nullLiteral(),
           }));
         }
       }

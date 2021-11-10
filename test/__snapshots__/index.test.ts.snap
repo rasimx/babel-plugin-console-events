@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros 1`] = `
+"console.log(['test']);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"log\\",
+    args: ['test'],
+    loc: [\\"macro.ts\\", 2]
+  });
+}
+
+console.warn(['test']);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"warn\\",
+    args: ['test'],
+    loc: [\\"macro.ts\\", 3]
+  });
+}
+
+console.info(['test']);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"info\\",
+    args: ['test'],
+    loc: [\\"macro.ts\\", 4]
+  });
+}
+
+console.error(['test']);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"error\\",
+    args: ['test'],
+    loc: [\\"macro.ts\\", 5]
+  });
+}
+
+console.debug(['test']);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"debug\\",
+    args: ['test'],
+    loc: [\\"macro.ts\\", 6]
+  });
+}"
+`;
+
+exports[`plugin 1`] = `
+"// @ts-nocheck
+console.log(\\"test string\\", 123);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"log\\",
+    args: [\\"test string\\", 123],
+    loc: [\\"plugin.ts\\", \\"2\\"]
+  });
+}
+
+console.info(\\"test string\\", 123);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"info\\",
+    args: [\\"test string\\", 123],
+    loc: [\\"plugin.ts\\", \\"3\\"]
+  });
+}
+
+console.error(\\"test string\\", 123);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"error\\",
+    args: [\\"test string\\", 123],
+    loc: [\\"plugin.ts\\", \\"4\\"]
+  });
+}
+
+console.warn(\\"test string\\", 123);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"warn\\",
+    args: [\\"test string\\", 123],
+    loc: [\\"plugin.ts\\", \\"5\\"]
+  });
+}
+
+console.debug(\\"test string\\", 123);
+
+if (console.events) {
+  console.events.emit({
+    type: \\"debug\\",
+    args: [\\"test string\\", 123],
+    loc: [\\"plugin.ts\\", \\"6\\"]
+  });
+}
+
+console.test(\\"test string\\", 123); // it shouldn't work here
+
+function f() {}
+
+f(console.log(\\"test string\\", 123)); // prevent stack overflow"
+`;
