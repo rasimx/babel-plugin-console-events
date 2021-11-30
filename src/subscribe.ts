@@ -24,7 +24,7 @@ class EventEmitter {
   }
 }
 
-export function subscribe(listener: Listener): void{
+export default function subscribe(listener: Listener): void{
   //@ts-ignore
   console.events = console.events ?? new EventEmitter();
   //@ts-ignore

@@ -9,8 +9,8 @@
     "checkJs": false,
     "declaration": true,
     "outDir": "lib",
-    "sourceMap": true,
     "skipLibCheck": true,
+    "strict": true
   },
   "include": ["src"]
 }
