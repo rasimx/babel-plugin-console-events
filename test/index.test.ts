@@ -1,7 +1,6 @@
 import * as path from "path";
 import { transformFileSync } from '@babel/core';
-import subscribe, { ConsoleEvent } from "../src/subscribe";
-import plugin from '../src/plugin'
+import plugin, { ConsoleEvent, subscribe } from "../src";
 
 describe('subscribe', () => {
   it('called with the passed arguments', () => {

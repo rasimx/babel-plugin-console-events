@@ -1,5 +1,5 @@
 import type babelCore from '@babel/core'
-import { types } from "@babel/core";
+import { Expression } from "@babel/types";
 
 type VisitorState = {
   file: {
@@ -8,18 +8,18 @@ type VisitorState = {
 }
 
 function consoleEventsPlugin(babel: typeof babelCore): babelCore.PluginObj<VisitorState> {
-  const {types: t, template} = babel;
+  const {types, template} = babel;
 
   return {
     name: "console-events-plugin",
     visitor: {
       CallExpression(path, state) {
 
-        if (t.isMemberExpression(path.node.callee) &&
-          t.isIdentifier(path.node.callee.object) && path.node.callee.object.name == "console" &&
-          t.isIdentifier(path.node.callee.property) &&
+        if (types.isMemberExpression(path.node.callee) &&
+          types.isIdentifier(path.node.callee.object) && path.node.callee.object.name == "console" &&
+          types.isIdentifier(path.node.callee.property) &&
           ['log', 'info', 'error', 'debug', 'warn'].includes(path.node.callee.property.name) &&
-          t.isExpressionStatement(path.parentPath)
+          types.isExpressionStatement(path.parentPath)
         ) {
 
           const fileName = state.file.opts.filename?.split('/').splice(-1)[0];
@@ -35,10 +35,10 @@ function consoleEventsPlugin(babel: typeof babelCore): babelCore.PluginObj<Visit
                               }
                             `);
           path.insertAfter(newNode({
-            TYPE: t.stringLiteral(path.node.callee.property.name),
-            ARGS: t.arrayExpression(path.node.arguments as Array<types.Expression>),
+            TYPE: types.stringLiteral(path.node.callee.property.name),
+            ARGS: types.arrayExpression(path.node.arguments as Expression[]),
             LOC: fileName && lineNumber
-              ? t.arrayExpression([t.stringLiteral(fileName), t.stringLiteral(lineNumber.toString())])
+              ? types.arrayExpression([types.stringLiteral(fileName), types.stringLiteral(lineNumber.toString())])
               : types.nullLiteral(),
           }));
         }
